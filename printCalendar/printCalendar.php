@@ -7,6 +7,8 @@
 <body>
     <div>
         <?php
+            // error_reporting(E_ALL & ~E_STRICT);
+        error_reporting(E_ALL & ~E_DEPRECATED & ~E_STRICT);
             require_once '/usr/share/php/Calendar/Month/Weeks.php';
             // require_once 'Calender/Month/Weeks.php';
             $weekdayDefines = [
@@ -19,7 +21,7 @@
                 ['土', 'saturday'],
             ];
 
-            $wddkdayBase = 0;
+            $weekdayBase = 0;
             $year = (int)date('Y');
             $month = (int)date('m');
 
@@ -33,7 +35,7 @@
             }
 
             // カレンダー生成
-            $calender = new Calender_Month_Weeks($year, $month, $weekdayBase);
+            $calender = new Calendar_Month_Weeks($year, $month, $weekdayBase);
             $calender->build();
 
             // カレンダーの曜日部分を表示
@@ -55,7 +57,7 @@
                 <tr>
                     <?php
                         for ($i=0; $i < 7; $i++) {
-                            $weekday = ($weekbase + $i) % 7;
+                            $weekday = ($weekdayBase + $i) % 7;
                             $weekdayText = $weekdayDefines[$weekday][0];
                             $weekdayClass = $weekdayDefines[$weekday][1];
                             echo '<th class="' . $weekdayClass. '">', $weekdayText, '</th>';
@@ -70,9 +72,9 @@
                         $weekday = 0;
 
                         echo '<tr>';
-                        while ($day <= $days->fetch()) {
+                        while ($days <= $days->fetch()) {
                             $weekdayClass = $weekdayDefines[$weekday][1];
-                            if ($day->isEmpty()) {
+                            if ($days->isEmpty()) {
                                 $dayText = '&nbsp';
                             } else {
                                 $dayText = $day->thisDay();
