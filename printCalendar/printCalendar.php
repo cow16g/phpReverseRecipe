@@ -8,7 +8,7 @@
     <div>
         <?php
             // error_reporting(E_ALL & ~E_STRICT);
-        error_reporting(E_ALL & ~E_DEPRECATED & ~E_STRICT);
+            error_reporting(E_ALL & ~E_DEPRECATED & ~E_STRICT);
             require_once '/usr/share/php/Calendar/Month/Weeks.php';
             // require_once 'Calender/Month/Weeks.php';
             $weekdayDefines = [
